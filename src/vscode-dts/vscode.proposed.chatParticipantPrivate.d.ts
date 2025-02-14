@@ -81,11 +81,6 @@ declare module 'vscode' {
 
 	export interface ChatParticipant {
 		supportIssueReporting?: boolean;
-
-		/**
-		 * Temp, support references that are slow to resolve and should be tools rather than references.
-		 */
-		supportsSlowReferences?: boolean;
 	}
 
 	export interface ChatErrorDetails {
@@ -128,6 +123,12 @@ declare module 'vscode' {
 		tooltip?: string | MarkdownString;
 	}
 
+	export class ExtendedLanguageModelToolResult extends LanguageModelToolResult {
+		toolResultMessage?: string | MarkdownString;
+	}
+
+	// #region Chat participant detection
+
 	export interface ChatParticipantMetadata {
 		participant: string;
 		command?: string;
@@ -146,4 +147,6 @@ declare module 'vscode' {
 	export namespace chat {
 		export function registerChatParticipantDetectionProvider(participantDetectionProvider: ChatParticipantDetectionProvider): Disposable;
 	}
+
+	// #endregion
 }
